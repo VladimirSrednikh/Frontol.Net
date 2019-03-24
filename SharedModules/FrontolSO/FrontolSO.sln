@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontolSO", "FrontolSO\FrontolSO.csproj", "{EC565244-9D9D-452B-B1EF-2CB0F607CCB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontolServiceIni", "..\FrontolServiceIni\FrontolServiceIni\FrontolServiceIni.csproj", "{C74E0526-BC3F-4E7B-B0A9-C2A7986DCE1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EC565244-9D9D-452B-B1EF-2CB0F607CCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC565244-9D9D-452B-B1EF-2CB0F607CCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC565244-9D9D-452B-B1EF-2CB0F607CCB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C74E0526-BC3F-4E7B-B0A9-C2A7986DCE1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74E0526-BC3F-4E7B-B0A9-C2A7986DCE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74E0526-BC3F-4E7B-B0A9-C2A7986DCE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C74E0526-BC3F-4E7B-B0A9-C2A7986DCE1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
