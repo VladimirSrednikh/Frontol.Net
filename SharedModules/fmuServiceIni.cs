@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.ServiceProcess;
+using System.Runtime.InteropServices;
 
 namespace FrontolSO
 {
@@ -43,7 +45,7 @@ namespace FrontolSO
             }
         }
         private
-        //THandle fSrvHandle; 
+            ServiceController SC;
         // byte fLastState;
         const string USER_LOCAL_SYSTEM = "LocalSystem";
         const string PASS_UNASSIGNED = "PASS_UNASSIGNED";
@@ -51,20 +53,60 @@ namespace FrontolSO
 
         private void LoadDBParams()
         {
-            #region
-            IniFile ini = new IniFile(GetServiceIniPath());
-            SaveIni(ini);
-            #endregion
+            SaveIni(new IniFile(GetServiceIniPath()));
         }
         private void SaveDBParams()
         {
-            #region
-            string ini = GetServiceIniPath();
-            #endregion
+            SaveIni(new IniFile(GetServiceIniPath()));
         }
-        private void LoadService() { }
+        private void LoadService() {
+            try
+            {
+                SC = new ServiceController(Params().SvcName);
+                //throw new Win32Exception(Marshal.GetLastWin32Error(), "Unable to open handle to Service Control Manager");
+                /*
+                user = SC.
+                    string(lpqscBuf.lpServiceStartName);
+                rbLogonUser.Checked := user <> USER_LOCAL_SYSTEM;
+                if rbLogonUser.Checked then
+                begin
+          edtLogonPassword.Text := PASS_UNASSIGNED; // пароль получить невозможно, просто отобразим звездочки (АИ)
+                edtLogonUser.Text := user;
+                end; */
+
+
+
+            }
+            catch (Win32Exception ex)
+            {                       //ERROR_ACCESS_DENIED
+                if (ex.NativeErrorCode == 5) edtPath.Text = "Недостаточно прав для управления службой";
+                else edtPath.Text = "Служба " + Params().DisplayName + " не установлена";
+            }
+            finally {
+                UpdateControls();
+            }
+        }
         private void SaveService() { }
-        private void UpdateControls(int aServiceStatus) { }
+        private void UpdateControls() {
+            if (SC == null)
+            {
+                btnStart.Enabled = false;
+                btnStop.Enabled = false;
+                btnRestart.Enabled = false;
+                cbxServiceAutoRun.Enabled = false;
+                tmrUpdateStatus.Enabled = false;
+                rbLogonSystem.Enabled = false;
+                rbLogonUser.Enabled = false;
+                edtLogonUser.Enabled = false;
+                edtLogonPassword.Enabled = false;
+                btnSelectLogonUser.Enabled = false;
+            }
+            else {
+                //cbxServiceAutoRun.Checked = (SC.StartType == ServiceStartMode.Automatic);
+
+              
+            };
+        }
         private string GetServiceIniPath()
         {
             if (fIniLogFile != "") return fIniLogFile;

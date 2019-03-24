@@ -28,52 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tsService = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblSvcState = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnRestart = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.edtPath = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.cbxServiceAutoRun = new System.Windows.Forms.CheckBox();
             this.tsServiceLogon = new System.Windows.Forms.TabPage();
+            this.edtLogonPassword = new System.Windows.Forms.TextBox();
+            this.edtLogonUser = new System.Windows.Forms.TextBox();
+            this.rbLogonUser = new System.Windows.Forms.RadioButton();
+            this.rbLogonSystem = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnSelectLogonUser = new System.Windows.Forms.Button();
             this.tsSystem = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.edtDBPswrd = new System.Windows.Forms.TextBox();
+            this.edtLogFile = new System.Windows.Forms.TextBox();
+            this.edtDBUser = new System.Windows.Forms.TextBox();
+            this.edtDBFile = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.edtDBPath = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
             this.btnTestDB = new System.Windows.Forms.Button();
             this.btnOpenDB = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblSvcState = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.rbLogonSystem = new System.Windows.Forms.RadioButton();
-            this.rbLogonUser = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.edtDBPath = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.edtDBFile = new System.Windows.Forms.TextBox();
-            this.edtDBUser = new System.Windows.Forms.TextBox();
-            this.edtLogFile = new System.Windows.Forms.TextBox();
-            this.edtDBPswrd = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tmrUpdateStatus = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tsService.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tsServiceLogon.SuspendLayout();
             this.tsSystem.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,7 +109,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnStart);
             this.groupBox1.Controls.Add(this.btnStop);
-            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.btnRestart);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Location = new System.Drawing.Point(4, 114);
             this.groupBox1.Name = "groupBox1";
@@ -115,6 +117,24 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Управление";
+            // 
+            // lblSvcState
+            // 
+            this.lblSvcState.AutoSize = true;
+            this.lblSvcState.Location = new System.Drawing.Point(91, 20);
+            this.lblSvcState.Name = "lblSvcState";
+            this.lblSvcState.Size = new System.Drawing.Size(73, 13);
+            this.lblSvcState.TabIndex = 5;
+            this.lblSvcState.Text = "<Состояние>";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Состояние:";
             // 
             // btnStart
             // 
@@ -134,14 +154,14 @@
             this.btnStop.Text = "Стоп";
             this.btnStop.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnRestart
             // 
-            this.button5.Location = new System.Drawing.Point(178, 44);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(77, 25);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Перезапуск";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnRestart.Location = new System.Drawing.Point(178, 44);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(77, 25);
+            this.btnRestart.TabIndex = 2;
+            this.btnRestart.Text = "Перезапуск";
+            this.btnRestart.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
@@ -154,7 +174,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBox3);
+            this.groupBox4.Controls.Add(this.edtPath);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Location = new System.Drawing.Point(4, 44);
             this.groupBox4.Name = "groupBox4";
@@ -162,6 +182,22 @@
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Регистрационная информация службы";
+            // 
+            // edtPath
+            // 
+            this.edtPath.Location = new System.Drawing.Point(10, 36);
+            this.edtPath.Name = "edtPath";
+            this.edtPath.Size = new System.Drawing.Size(329, 20);
+            this.edtPath.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Путь";
             // 
             // cbxServiceAutoRun
             // 
@@ -175,8 +211,8 @@
             // 
             // tsServiceLogon
             // 
-            this.tsServiceLogon.Controls.Add(this.textBox2);
-            this.tsServiceLogon.Controls.Add(this.textBox1);
+            this.tsServiceLogon.Controls.Add(this.edtLogonPassword);
+            this.tsServiceLogon.Controls.Add(this.edtLogonUser);
             this.tsServiceLogon.Controls.Add(this.rbLogonUser);
             this.tsServiceLogon.Controls.Add(this.rbLogonSystem);
             this.tsServiceLogon.Controls.Add(this.label3);
@@ -188,6 +224,51 @@
             this.tsServiceLogon.TabIndex = 1;
             this.tsServiceLogon.Text = "Вход в систему";
             this.tsServiceLogon.UseVisualStyleBackColor = true;
+            // 
+            // edtLogonPassword
+            // 
+            this.edtLogonPassword.Location = new System.Drawing.Point(130, 61);
+            this.edtLogonPassword.Name = "edtLogonPassword";
+            this.edtLogonPassword.Size = new System.Drawing.Size(160, 20);
+            this.edtLogonPassword.TabIndex = 5;
+            // 
+            // edtLogonUser
+            // 
+            this.edtLogonUser.Location = new System.Drawing.Point(130, 35);
+            this.edtLogonUser.Name = "edtLogonUser";
+            this.edtLogonUser.Size = new System.Drawing.Size(160, 20);
+            this.edtLogonUser.TabIndex = 4;
+            // 
+            // rbLogonUser
+            // 
+            this.rbLogonUser.AutoSize = true;
+            this.rbLogonUser.Location = new System.Drawing.Point(4, 37);
+            this.rbLogonUser.Name = "rbLogonUser";
+            this.rbLogonUser.Size = new System.Drawing.Size(124, 17);
+            this.rbLogonUser.TabIndex = 3;
+            this.rbLogonUser.TabStop = true;
+            this.rbLogonUser.Text = "С учетной записью:";
+            this.rbLogonUser.UseVisualStyleBackColor = true;
+            // 
+            // rbLogonSystem
+            // 
+            this.rbLogonSystem.AutoSize = true;
+            this.rbLogonSystem.Location = new System.Drawing.Point(4, 11);
+            this.rbLogonSystem.Name = "rbLogonSystem";
+            this.rbLogonSystem.Size = new System.Drawing.Size(179, 17);
+            this.rbLogonSystem.TabIndex = 2;
+            this.rbLogonSystem.TabStop = true;
+            this.rbLogonSystem.Text = "С системной учетной записью";
+            this.rbLogonSystem.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(76, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Пароль:";
             // 
             // btnSelectLogonUser
             // 
@@ -213,6 +294,107 @@
             this.tsSystem.TabIndex = 2;
             this.tsSystem.Text = "База данных";
             this.tsSystem.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.edtDBPswrd);
+            this.groupBox2.Controls.Add(this.edtLogFile);
+            this.groupBox2.Controls.Add(this.edtDBUser);
+            this.groupBox2.Controls.Add(this.edtDBFile);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Location = new System.Drawing.Point(4, 44);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(348, 113);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Параметры базы данных";
+            // 
+            // edtDBPswrd
+            // 
+            this.edtDBPswrd.Location = new System.Drawing.Point(178, 78);
+            this.edtDBPswrd.Name = "edtDBPswrd";
+            this.edtDBPswrd.Size = new System.Drawing.Size(160, 20);
+            this.edtDBPswrd.TabIndex = 7;
+            this.edtDBPswrd.Text = "masterkey";
+            // 
+            // edtLogFile
+            // 
+            this.edtLogFile.Location = new System.Drawing.Point(10, 78);
+            this.edtLogFile.Name = "edtLogFile";
+            this.edtLogFile.Size = new System.Drawing.Size(160, 20);
+            this.edtLogFile.TabIndex = 6;
+            this.edtLogFile.Text = "LOG.GDB";
+            // 
+            // edtDBUser
+            // 
+            this.edtDBUser.Location = new System.Drawing.Point(178, 36);
+            this.edtDBUser.Name = "edtDBUser";
+            this.edtDBUser.Size = new System.Drawing.Size(160, 20);
+            this.edtDBUser.TabIndex = 5;
+            this.edtDBUser.Text = "SYSDBA";
+            // 
+            // edtDBFile
+            // 
+            this.edtDBFile.Location = new System.Drawing.Point(10, 36);
+            this.edtDBFile.Name = "edtDBFile";
+            this.edtDBFile.Size = new System.Drawing.Size(160, 20);
+            this.edtDBFile.TabIndex = 4;
+            this.edtDBFile.Text = "MAIN.GDB";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(178, 62);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Пароль:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(10, 62);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Журнал:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(178, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Пользователь:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Основная:";
+            // 
+            // edtDBPath
+            // 
+            this.edtDBPath.Location = new System.Drawing.Point(4, 20);
+            this.edtDBPath.Name = "edtDBPath";
+            this.edtDBPath.Size = new System.Drawing.Size(324, 20);
+            this.edtDBPath.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(120, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Каталог базы данных:";
             // 
             // btnRestoreDefaults
             // 
@@ -269,186 +451,6 @@
             this.btnApply.Text = "Применить";
             this.btnApply.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Состояние:";
-            // 
-            // lblSvcState
-            // 
-            this.lblSvcState.AutoSize = true;
-            this.lblSvcState.Location = new System.Drawing.Point(91, 20);
-            this.lblSvcState.Name = "lblSvcState";
-            this.lblSvcState.Size = new System.Drawing.Size(73, 13);
-            this.lblSvcState.TabIndex = 5;
-            this.lblSvcState.Text = "<Состояние>";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Путь";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(76, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Пароль:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 4);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Каталог базы данных:";
-            // 
-            // rbLogonSystem
-            // 
-            this.rbLogonSystem.AutoSize = true;
-            this.rbLogonSystem.Location = new System.Drawing.Point(4, 11);
-            this.rbLogonSystem.Name = "rbLogonSystem";
-            this.rbLogonSystem.Size = new System.Drawing.Size(179, 17);
-            this.rbLogonSystem.TabIndex = 2;
-            this.rbLogonSystem.TabStop = true;
-            this.rbLogonSystem.Text = "С системной учетной записью";
-            this.rbLogonSystem.UseVisualStyleBackColor = true;
-            // 
-            // rbLogonUser
-            // 
-            this.rbLogonUser.AutoSize = true;
-            this.rbLogonUser.Location = new System.Drawing.Point(4, 37);
-            this.rbLogonUser.Name = "rbLogonUser";
-            this.rbLogonUser.Size = new System.Drawing.Size(124, 17);
-            this.rbLogonUser.TabIndex = 3;
-            this.rbLogonUser.TabStop = true;
-            this.rbLogonUser.Text = "С учетной записью:";
-            this.rbLogonUser.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(130, 35);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 20);
-            this.textBox1.TabIndex = 4;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(130, 61);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 20);
-            this.textBox2.TabIndex = 5;
-            // 
-            // edtDBPath
-            // 
-            this.edtDBPath.Location = new System.Drawing.Point(4, 20);
-            this.edtDBPath.Name = "edtDBPath";
-            this.edtDBPath.Size = new System.Drawing.Size(324, 20);
-            this.edtDBPath.TabIndex = 4;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.edtDBPswrd);
-            this.groupBox2.Controls.Add(this.edtLogFile);
-            this.groupBox2.Controls.Add(this.edtDBUser);
-            this.groupBox2.Controls.Add(this.edtDBFile);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(4, 44);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(348, 113);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Параметры базы данных";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Основная:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(178, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Пользователь:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 62);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Журнал:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(178, 62);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 13);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Пароль:";
-            // 
-            // edtDBFile
-            // 
-            this.edtDBFile.Location = new System.Drawing.Point(10, 36);
-            this.edtDBFile.Name = "edtDBFile";
-            this.edtDBFile.Size = new System.Drawing.Size(160, 20);
-            this.edtDBFile.TabIndex = 4;
-            this.edtDBFile.Text = "MAIN.GDB";
-            // 
-            // edtDBUser
-            // 
-            this.edtDBUser.Location = new System.Drawing.Point(178, 36);
-            this.edtDBUser.Name = "edtDBUser";
-            this.edtDBUser.Size = new System.Drawing.Size(160, 20);
-            this.edtDBUser.TabIndex = 5;
-            this.edtDBUser.Text = "SYSDBA";
-            // 
-            // edtLogFile
-            // 
-            this.edtLogFile.Location = new System.Drawing.Point(10, 78);
-            this.edtLogFile.Name = "edtLogFile";
-            this.edtLogFile.Size = new System.Drawing.Size(160, 20);
-            this.edtLogFile.TabIndex = 6;
-            this.edtLogFile.Text = "LOG.GDB";
-            // 
-            // edtDBPswrd
-            // 
-            this.edtDBPswrd.Location = new System.Drawing.Point(178, 78);
-            this.edtDBPswrd.Name = "edtDBPswrd";
-            this.edtDBPswrd.Size = new System.Drawing.Size(160, 20);
-            this.edtDBPswrd.TabIndex = 7;
-            this.edtDBPswrd.Text = "masterkey";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(10, 36);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(329, 20);
-            this.textBox3.TabIndex = 1;
-            // 
             // fmuServiceIni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,9 +472,9 @@
             this.tsServiceLogon.PerformLayout();
             this.tsSystem.ResumeLayout(false);
             this.tsSystem.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -485,7 +487,7 @@
         private System.Windows.Forms.TabPage tsSystem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnSelectLogonUser;
@@ -500,8 +502,8 @@
         private System.Windows.Forms.Label lblSvcState;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox edtLogonPassword;
+        private System.Windows.Forms.TextBox edtLogonUser;
         private System.Windows.Forms.RadioButton rbLogonUser;
         private System.Windows.Forms.RadioButton rbLogonSystem;
         private System.Windows.Forms.Label label3;
@@ -516,6 +518,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox edtDBPath;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox edtPath;
+        private System.Windows.Forms.Timer tmrUpdateStatus;
     }
 }
