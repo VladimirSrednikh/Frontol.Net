@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,12 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PosConst.cs" />
     <Compile Include="fmuServiceIni.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="fmuServiceIni.Designer.cs">
       <DependentUpon>fmuServiceIni.cs</DependentUpon>
     </Compile>
+    <Compile Include="IniFile.cs" />
+    <Compile Include="LvvShell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

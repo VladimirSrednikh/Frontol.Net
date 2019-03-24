@@ -13,7 +13,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -44,8 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fmuFrontolServiceIni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fmuFrontolServiceIni.Designer.cs">
+      <DependentUpon>fmuFrontolServiceIni.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="fmuFrontolServiceIni.resx">
+      <DependentUpon>fmuFrontolServiceIni.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -66,7 +75,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FrontolSO\FrontolSO\FrontolSO.csproj">
+    <ProjectReference Include="..\SharedModules\FrontolSO.csproj">
       <Project>{ec565244-9d9d-452b-b1ef-2cb0f607ccb0}</Project>
       <Name>FrontolSO</Name>
     </ProjectReference>
