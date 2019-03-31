@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LvvWaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LvvWaitForm.Designer.cs">
+      <DependentUpon>LvvWaitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServiceInfo.cs" />
     <Compile Include="PosConst.cs" />
     <Compile Include="fmuServiceIni.cs">
@@ -63,6 +69,9 @@
   <ItemGroup>
     <EmbeddedResource Include="fmuServiceIni.resx">
       <DependentUpon>fmuServiceIni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LvvWaitForm.resx">
+      <DependentUpon>LvvWaitForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -29,14 +29,14 @@ namespace FrontolSO
         }
     }
 
-    public abstract partial class fmuServiceIni : Form
+    public partial class fmuServiceIni : Form
     {
         protected
           string fIniLogFile;
 
         void LoadIni(IniFile AIni) {}
         void SaveIni(IniFile AIni){}
-        protected abstract TServiceParams Params();
+        protected virtual TServiceParams Params() { return new TServiceParams(); }
         string GetServiceLogPath() {
             if (fIniLogFile != "") {
                 return fIniLogFile;
@@ -44,38 +44,33 @@ namespace FrontolSO
                 return "";
             }
         }
-        private
-            ServiceController SC;
-        // byte fLastState;
+        
+        private ServiceControllerStatus fLastState = ServiceControllerStatus.Stopped;
         const string USER_LOCAL_SYSTEM = "LocalSystem";
         const string PASS_UNASSIGNED = "PASS_UNASSIGNED";
 
 
         private void LoadDBParams()
         {
-            SaveIni(new IniFile(GetServiceIniPath()));
+            LoadIni(new IniFile(GetServiceIniPath()));
         }
         private void SaveDBParams()
         {
             SaveIni(new IniFile(GetServiceIniPath()));
         }
         private void LoadService() {
+            TServiceInfo SI = new TServiceInfo();
             try
-            {
-                SC = new ServiceController(Params().SvcName);
-                //throw new Win32Exception(Marshal.GetLastWin32Error(), "Unable to open handle to Service Control Manager");
-                /*
-                user = SC.
-                    string(lpqscBuf.lpServiceStartName);
-                rbLogonUser.Checked := user <> USER_LOCAL_SYSTEM;
-                if rbLogonUser.Checked then
-                begin
-          edtLogonPassword.Text := PASS_UNASSIGNED; // пароль получить невозможно, просто отобразим звездочки (АИ)
-                edtLogonUser.Text := user;
-                end; */
-
-
-
+            {                
+                ServiceInfo.GetServiceInfo(Params().SvcName, out SI);
+                cbxServiceAutoRun.Checked = (SI.StartType == (uint)ServiceStartMode.Automatic);
+                edtPath.Text = SI.lpBinaryPathName;
+                rbLogonUser.Checked = (SI.lpServiceStartName != USER_LOCAL_SYSTEM);
+                
+                if (rbLogonUser.Checked) {
+                    edtLogonPassword.Text = PASS_UNASSIGNED; // пароль получить невозможно, просто отобразим звездочки
+                    edtLogonUser.Text = SI.lpServiceStartName;
+                }
             }
             catch (Win32Exception ex)
             {                       //ERROR_ACCESS_DENIED
@@ -83,12 +78,30 @@ namespace FrontolSO
                 else edtPath.Text = "Служба " + Params().DisplayName + " не установлена";
             }
             finally {
-                UpdateControls();
+                UpdateControls(SI);
             }
         }
-        private void SaveService() { }
-        private void UpdateControls() {
-            if (SC == null)
+        private void SaveService() {
+            TServiceInfo SI;
+            ServiceInfo.GetServiceInfo(Params().SvcName, out SI);
+
+            if (SI.ServiceName != "") {
+                TServiceInfo SC_new = new TServiceInfo();
+                SC_new.ServiceName = SI.ServiceName;
+                SC_new.Password = edtLogonPassword.Text;
+                if (cbxServiceAutoRun.Checked) SC_new.StartType = ServiceInfo.SERVICE_AUTO_START;
+                else SC_new.StartType = ServiceInfo.SERVICE_DEMAND_START;
+
+                if ((!rbLogonSystem.Checked) & (edtLogonUser.Text.Trim() == "")) rbLogonSystem.Checked = true;
+                if (rbLogonSystem.Checked) {
+                }
+                ServiceInfo.ChangeServiceConfig(SI.ServiceName, SC_new);
+            }               
+
+        }
+        private void UpdateControls(TServiceInfo SI) {
+            Color[] edtEnColor = { SystemColors.ButtonFace, SystemColors.Window };
+            if (SI.ServiceName == "")
             {
                 btnStart.Enabled = false;
                 btnStop.Enabled = false;
@@ -102,9 +115,26 @@ namespace FrontolSO
                 btnSelectLogonUser.Enabled = false;
             }
             else {
-                //cbxServiceAutoRun.Checked = (SC.StartType == ServiceStartMode.Automatic);
+                if (rbLogonUser.Checked) edtLogonUser.BackColor = edtEnColor[1];
+                else edtLogonUser.BackColor = edtEnColor[0];
+                edtLogonUser.Enabled = rbLogonUser.Checked;
 
-              
+                if (rbLogonUser.Checked) edtLogonPassword.BackColor = edtEnColor[1];
+                else edtLogonPassword.BackColor = edtEnColor[0];
+                edtLogonPassword.Enabled = rbLogonUser.Checked;
+                lblLogonPassword.Enabled = rbLogonUser.Checked;
+
+                btnSelectLogonUser.Enabled = rbLogonUser.Checked;
+                if (fLastState != SI.dwCurrentState)
+                {
+                    fLastState = SI.dwCurrentState;
+
+                    btnStart.Enabled = SI.dwCurrentState == ServiceControllerStatus.Stopped;
+                    btnStop.Enabled = SI.dwCurrentState == ServiceControllerStatus.Running;
+                    btnRestart.Enabled = SI.dwCurrentState == ServiceControllerStatus.Running;
+                    lblSvcState.Text = SI.StateAsStr();                   
+                }
+
             };
         }
         private string GetServiceIniPath()
@@ -112,13 +142,69 @@ namespace FrontolSO
             if (fIniLogFile != "") return fIniLogFile;
             else return LvvShell.GetFrontolCommonAppDataPath("Logs");
         }
-        private void StartService(bool aApplySettings) { }
+        private void StartService(bool aApplySettings) {
+            if (aApplySettings & btnApply.Enabled) {
+                if (MessageBox.Show("Сохранить изменения ?", "", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+                SaveService();
+                SaveDBParams();
+                btnApply.Enabled = false;
+            }
+            TServiceInfo SI;            
+            ServiceInfo.GetServiceInfo(Params().SvcName, out SI);
+            if (SI.dwCurrentState != ServiceControllerStatus.Stopped) throw new System.ArgumentException("'В данный момент запустить " + Params().DisplayName + " невозможно!'");
+            ServiceController sc = new ServiceController(Params().SvcName);
+            sc.Start();
+            try
+            {
+                /*
 
-
-
+        wfrm:= TLvvWaitForm.CreateShow(aviFindFile, 'Прервать', nil);
+            try
+      wfrm.Status := 'Запуск службы!';
+            while ServiceStatus.dwCurrentState = SERVICE_START_PENDING do
+                    begin
+      
+              Sleep(1000);
+            if not QueryServiceStatus(fSrvHandle, ServiceStatus) then
+              RaiseLastOSError;
+            if wfrm.ButtonPressed then
+              Abort;
+            end;
+    finally
+      wfrm.Free;
+            end;
+            if ServiceStatus.dwCurrentState = SERVICE_STOPPED then
+                LvvShowMessageBox('Не удалось запустить службу ' + Params.DisplayName + '. Смотрите журнал ошибок', MB_OK or MB_ICONERROR, 0);
+                */
+            }
+            finally {
+                UpdateControls(SI);
+            }
+            }
         public fmuServiceIni()
         {
             InitializeComponent();
+        }
+
+        private void btnRestoreDefaults_Click(object sender, EventArgs e)
+        {
+            edtDBFile.Text = "MAIN.GDB";
+            edtLogFile.Text = "LOG.GDB";
+            edtDBUser.Text = "SYSDBA";
+            edtDBPswrd.Text = "masterkey";
+        }
+
+        private void ParamsChanged(object sender, EventArgs e)
+        {
+            btnApply.Enabled = true;
+        }
+
+        private void rbLogon_CheckedChanged(object sender, EventArgs e)
+        {
+            ParamsChanged(sender, e);
+            TServiceInfo SI;
+            ServiceInfo.GetServiceInfo(Params().SvcName, out SI);
+            UpdateControls(SI);
         }
     }
 }

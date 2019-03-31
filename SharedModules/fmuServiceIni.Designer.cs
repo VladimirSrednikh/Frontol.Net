@@ -1,6 +1,6 @@
 ﻿namespace FrontolSO
 {
-    partial class fmuServiceIni
+    public partial class fmuServiceIni
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,7 @@
             this.edtLogonUser = new System.Windows.Forms.TextBox();
             this.rbLogonUser = new System.Windows.Forms.RadioButton();
             this.rbLogonSystem = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblLogonPassword = new System.Windows.Forms.Label();
             this.btnSelectLogonUser = new System.Windows.Forms.Button();
             this.tsSystem = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -187,6 +187,7 @@
             // 
             this.edtPath.Location = new System.Drawing.Point(10, 36);
             this.edtPath.Name = "edtPath";
+            this.edtPath.ReadOnly = true;
             this.edtPath.Size = new System.Drawing.Size(329, 20);
             this.edtPath.TabIndex = 1;
             // 
@@ -208,6 +209,7 @@
             this.cbxServiceAutoRun.TabIndex = 4;
             this.cbxServiceAutoRun.Text = "Автозапуск";
             this.cbxServiceAutoRun.UseVisualStyleBackColor = true;
+            this.cbxServiceAutoRun.CheckedChanged += new System.EventHandler(this.ParamsChanged);
             // 
             // tsServiceLogon
             // 
@@ -215,7 +217,7 @@
             this.tsServiceLogon.Controls.Add(this.edtLogonUser);
             this.tsServiceLogon.Controls.Add(this.rbLogonUser);
             this.tsServiceLogon.Controls.Add(this.rbLogonSystem);
-            this.tsServiceLogon.Controls.Add(this.label3);
+            this.tsServiceLogon.Controls.Add(this.lblLogonPassword);
             this.tsServiceLogon.Controls.Add(this.btnSelectLogonUser);
             this.tsServiceLogon.Location = new System.Drawing.Point(4, 22);
             this.tsServiceLogon.Name = "tsServiceLogon";
@@ -231,6 +233,7 @@
             this.edtLogonPassword.Name = "edtLogonPassword";
             this.edtLogonPassword.Size = new System.Drawing.Size(160, 20);
             this.edtLogonPassword.TabIndex = 5;
+            this.edtLogonPassword.TextChanged += new System.EventHandler(this.ParamsChanged);
             // 
             // edtLogonUser
             // 
@@ -238,6 +241,7 @@
             this.edtLogonUser.Name = "edtLogonUser";
             this.edtLogonUser.Size = new System.Drawing.Size(160, 20);
             this.edtLogonUser.TabIndex = 4;
+            this.edtLogonUser.TextChanged += new System.EventHandler(this.ParamsChanged);
             // 
             // rbLogonUser
             // 
@@ -249,6 +253,7 @@
             this.rbLogonUser.TabStop = true;
             this.rbLogonUser.Text = "С учетной записью:";
             this.rbLogonUser.UseVisualStyleBackColor = true;
+            this.rbLogonUser.CheckedChanged += new System.EventHandler(this.rbLogon_CheckedChanged);
             // 
             // rbLogonSystem
             // 
@@ -260,15 +265,16 @@
             this.rbLogonSystem.TabStop = true;
             this.rbLogonSystem.Text = "С системной учетной записью";
             this.rbLogonSystem.UseVisualStyleBackColor = true;
+            this.rbLogonSystem.CheckedChanged += new System.EventHandler(this.rbLogon_CheckedChanged);
             // 
-            // label3
+            // lblLogonPassword
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(76, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Пароль:";
+            this.lblLogonPassword.AutoSize = true;
+            this.lblLogonPassword.Location = new System.Drawing.Point(76, 64);
+            this.lblLogonPassword.Name = "lblLogonPassword";
+            this.lblLogonPassword.Size = new System.Drawing.Size(48, 13);
+            this.lblLogonPassword.TabIndex = 1;
+            this.lblLogonPassword.Text = "Пароль:";
             // 
             // btnSelectLogonUser
             // 
@@ -386,6 +392,7 @@
             this.edtDBPath.Name = "edtDBPath";
             this.edtDBPath.Size = new System.Drawing.Size(324, 20);
             this.edtDBPath.TabIndex = 4;
+            this.edtDBPath.TextChanged += new System.EventHandler(this.ParamsChanged);
             // 
             // label4
             // 
@@ -404,6 +411,7 @@
             this.btnRestoreDefaults.TabIndex = 2;
             this.btnRestoreDefaults.Text = "По умолчанию";
             this.btnRestoreDefaults.UseVisualStyleBackColor = true;
+            this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
             // btnTestDB
             // 
@@ -506,7 +514,7 @@
         private System.Windows.Forms.TextBox edtLogonUser;
         private System.Windows.Forms.RadioButton rbLogonUser;
         private System.Windows.Forms.RadioButton rbLogonSystem;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblLogonPassword;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox edtDBPswrd;
         private System.Windows.Forms.TextBox edtLogFile;
