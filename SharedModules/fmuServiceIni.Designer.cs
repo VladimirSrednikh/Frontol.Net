@@ -250,7 +250,6 @@
             this.rbLogonUser.Name = "rbLogonUser";
             this.rbLogonUser.Size = new System.Drawing.Size(124, 17);
             this.rbLogonUser.TabIndex = 3;
-            this.rbLogonUser.TabStop = true;
             this.rbLogonUser.Text = "С учетной записью:";
             this.rbLogonUser.UseVisualStyleBackColor = true;
             this.rbLogonUser.CheckedChanged += new System.EventHandler(this.rbLogon_CheckedChanged);
@@ -262,7 +261,6 @@
             this.rbLogonSystem.Name = "rbLogonSystem";
             this.rbLogonSystem.Size = new System.Drawing.Size(179, 17);
             this.rbLogonSystem.TabIndex = 2;
-            this.rbLogonSystem.TabStop = true;
             this.rbLogonSystem.Text = "С системной учетной записью";
             this.rbLogonSystem.UseVisualStyleBackColor = true;
             this.rbLogonSystem.CheckedChanged += new System.EventHandler(this.rbLogon_CheckedChanged);

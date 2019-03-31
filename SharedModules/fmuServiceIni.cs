@@ -68,7 +68,8 @@ namespace FrontolSO
                 cbxServiceAutoRun.Checked = (SI.StartType == (uint)ServiceStartMode.Automatic);
                 edtPath.Text = SI.lpBinaryPathName;
                 rbLogonUser.Checked = (SI.lpServiceStartName != USER_LOCAL_SYSTEM);
-                
+                rbLogonSystem.Checked = !rbLogonUser.Checked;
+
                 if (rbLogonUser.Checked) {
                     edtLogonPassword.Text = PASS_UNASSIGNED; // пароль получить невозможно, просто отобразим звездочки
                     edtLogonUser.Text = SI.lpServiceStartName;

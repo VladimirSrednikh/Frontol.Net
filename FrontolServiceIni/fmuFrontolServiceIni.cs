@@ -21,8 +21,8 @@ namespace FrontolServiceIni
             return new FrontolSO.TServiceParams(
                 "FrontolService.ini",
                 "DATABASE",
+                "srvFrontol",
                 "FrontolService",
-                "srvfrontol",
                 "FrontolService.log",
                 PosConst.INI_SECTION_CUSTOM
                 );
