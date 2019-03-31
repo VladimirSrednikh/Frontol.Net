@@ -32,11 +32,11 @@ namespace FrontolSO
 
     public partial class fmuServiceIni : Form
     {
-        protected
-          string fIniLogFile;
+        protected string fIniLogFile;
 
-        void LoadIni(IniFile AIni) {}
-        void SaveIni(IniFile AIni){}
+        protected void LoadIni(IniFile AIni) {
+        }
+        protected void SaveIni(IniFile AIni){}
         protected virtual TServiceParams Params() { return new TServiceParams(); }
         string GetServiceLogPath() {
             if (fIniLogFile != "") {
