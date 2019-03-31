@@ -489,7 +489,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        public System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tsService;
         private System.Windows.Forms.TabPage tsServiceLogon;
         private System.Windows.Forms.TabPage tsSystem;

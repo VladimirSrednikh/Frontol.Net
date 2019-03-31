@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.ServiceProcess;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace FrontolSO
 {
@@ -60,6 +61,7 @@ namespace FrontolSO
         }
         private void LoadService() {
             TServiceInfo SI = new TServiceInfo();
+            if (Params().SvcName == null) return;
             try
             {                
                 ServiceInfo.GetServiceInfo(Params().SvcName, out SI);
@@ -180,10 +182,12 @@ namespace FrontolSO
             finally {
                 UpdateControls(SI);
             }
-            }
+        }
+
         public fmuServiceIni()
         {
             InitializeComponent();
+            LoadService();
         }
 
         private void btnRestoreDefaults_Click(object sender, EventArgs e)
