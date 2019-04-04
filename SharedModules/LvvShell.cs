@@ -30,21 +30,17 @@ namespace FrontolSO
                                      sb);
         Debug.Assert(retVal >= 0);  // assert that the function call succeeded
         return sb.ToString();
-    }
+        }
 
-      public static string IncludeTrailingPathDelimiter(string s) {
-        if (s.EndsWith(Path.PathSeparator.ToString())) { return s; }
-        else return s + Path.PathSeparator;
-    }
       public static string GetFrontolCommonAppDataPath(string ASubFolder) {
-        string res = IncludeTrailingPathDelimiter(GetShellFolder(CSIDL_COMMON_APPDATA)) + "ATOL\\Frontol5\\";
-        if (ASubFolder != "") res = IncludeTrailingPathDelimiter(res + ASubFolder);
+        string res = LvvUtils.IncludeTrailingPathDelimiter(GetShellFolder(CSIDL_COMMON_APPDATA)) + "ATOL\\Frontol5\\";
+        if (ASubFolder != "") res = LvvUtils.IncludeTrailingPathDelimiter(res + ASubFolder);
         if (!Directory.Exists(res)) Directory.CreateDirectory(res);
         return res;
         }
       public static string GetFrontolUserAppDataPath(string ASubFolder) {
         string res = GetShellFolder(CSIDL_APPDATA);
-        if (ASubFolder != "") res = IncludeTrailingPathDelimiter(res + ASubFolder);
+        if (ASubFolder != "") res = LvvUtils.IncludeTrailingPathDelimiter(res + ASubFolder);
         if (!Directory.Exists(res)) Directory.CreateDirectory(res);
         return res;
         }

@@ -68,6 +68,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.tmrUpdateStatus = new System.Windows.Forms.Timer(this.components);
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tsService.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -419,6 +420,7 @@
             this.btnTestDB.TabIndex = 1;
             this.btnTestDB.Text = "Проверить";
             this.btnTestDB.UseVisualStyleBackColor = true;
+            this.btnTestDB.Click += new System.EventHandler(this.btnTestDB_Click);
             // 
             // btnOpenDB
             // 
@@ -428,6 +430,7 @@
             this.btnOpenDB.TabIndex = 0;
             this.btnOpenDB.Text = "...";
             this.btnOpenDB.UseVisualStyleBackColor = true;
+            this.btnOpenDB.Click += new System.EventHandler(this.btnOpenDB_Click);
             // 
             // panel1
             // 
@@ -456,6 +459,10 @@
             this.btnApply.TabIndex = 0;
             this.btnApply.Text = "Применить";
             this.btnApply.UseVisualStyleBackColor = true;
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.Description = "Выберите каталог";
             // 
             // fmuServiceIni
             // 
@@ -526,5 +533,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox edtPath;
         private System.Windows.Forms.Timer tmrUpdateStatus;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

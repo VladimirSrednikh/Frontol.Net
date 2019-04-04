@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,14 +36,18 @@ namespace FrontolSO
         protected string fIniLogFile;
 
         protected void LoadIni(IniFile AIni) {
+            AIni.Write("Path", edtDBPath.Text, Params().IniSection);
+            AIni.Write("User", edtDBUser.Text, Params().IniSection);
+            AIni.Write("Pass", EncryptToHexStr(edtDBPswrd.Text), Params().IniSection);
+            AIni.Write("DB", edtDBFile.Text, Params().IniSection);
         }
         protected void SaveIni(IniFile AIni){}
         protected virtual TServiceParams Params() { return new TServiceParams(); }
         string GetServiceLogPath() {
-            if (fIniLogFile != "") {
+            if (Path.GetDirectoryName(fIniLogFile) != "") {
                 return fIniLogFile;
             } else {
-                return "";
+                return LvvShell.GetFrontolCommonAppDataPath("Logs") + fIniLogFile;
             }
         }
         
@@ -154,7 +159,7 @@ namespace FrontolSO
             }
             TServiceInfo SI;            
             ServiceInfo.GetServiceInfo(Params().SvcName, out SI);
-            if (SI.dwCurrentState != ServiceControllerStatus.Stopped) throw new System.ArgumentException("'В данный момент запустить " + Params().DisplayName + " невозможно!'");
+            if (SI.dwCurrentState != ServiceControllerStatus.Stopped) throw new System.ArgumentException("В данный момент запустить " + Params().DisplayName + " невозможно!");
             ServiceController sc = new ServiceController(Params().SvcName);
             sc.Start();
             try
@@ -210,6 +215,20 @@ namespace FrontolSO
             TServiceInfo SI;
             ServiceInfo.GetServiceInfo(Params().SvcName, out SI);
             UpdateControls(SI);
+        }
+
+        private void btnOpenDB_Click(object sender, EventArgs e)
+        {
+            string dbpath = LvvStrUtils.GetPathWOHost(edtDBPath.Text);
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK) edtDBPath.Text = "localhost:" + LvvUtils.IncludeTrailingPathDelimiter(folderBrowserDialog1.SelectedPath);
+        }
+
+        private void btnTestDB_Click(object sender, EventArgs e)
+        {
+            if (LvvStrUtils.GetHostName(edtDBPath.Text) == "") throw new System.ArgumentException("Путь к базе должен быть сетевым!");
+            //CheckDB(edtDBPath.Text, edtDBUser.Text, edtDBPswrd.Text, edtDBFile.Text, edtLogFile.Text, True);
+            MessageBox.Show("Проверка подключения к БД прошла успешно.");
         }
     }
 }
